@@ -17,6 +17,7 @@ namespace iQmetrix.PokerHandShowdown.App
                     var serviceProvider = services.BuildServiceProvider();
                     services.AddSingleton<IHostedService, PokerHandShowdown>();
                     services.AddScoped<ICardGameService, PokerGameService>();
+                    services.AddScoped<ICardHandCreator, PokerHandCreator>();
                 })
                 .ConfigureLogging((hostContext, logging) =>
                 {

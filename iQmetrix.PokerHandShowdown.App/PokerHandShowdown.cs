@@ -1,23 +1,25 @@
-﻿using iQmetrix.PokerHandShowdown.Implementations;
-using iQmetrix.PokerHandShowdown.Interfaces;
+﻿using iQmetrix.PokerHandShowdown.Interfaces;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using System;
 
 namespace iQmetrix.PokerHandShowdown.App
 {
     public class PokerHandShowdown : IHostedService
     {
         private readonly ICardGameService _cardGameService;
+        private readonly ICardHandCreator _cardHandCreator;
         private readonly ILogger _logger;
         private readonly IHostApplicationLifetime _lifeTime;
 
-        public PokerHandShowdown(ICardGameService cardGameService, ILogger<PokerHandShowdown> logger, IHostApplicationLifetime lifeTime)
+        public PokerHandShowdown(ICardGameService cardGameService, ICardHandCreator cardHandCreator, ILogger<PokerHandShowdown> logger, IHostApplicationLifetime lifeTime)
         {
             _cardGameService = cardGameService;
+            _cardHandCreator = cardHandCreator;
             _logger = logger;
             _lifeTime = lifeTime;
         }
@@ -33,7 +35,7 @@ namespace iQmetrix.PokerHandShowdown.App
                 playersAndCards.ToList().ForEach(async p =>
                     {
                         var _ = p.Split(',');
-                        hands.Add(_[0], await new PokerHandCreator().CreateCardGameHand(_));
+                        hands.Add(_[0], await _cardHandCreator.CreateCardGameHand(_));
                     }
                 );
 
@@ -45,10 +47,9 @@ namespace iQmetrix.PokerHandShowdown.App
                     }
                 );
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-
-                throw;
+                _logger.LogError(e, "Exception occurred in StartAsync");
             }
 
             // needed to prevent host from running indefinitely
