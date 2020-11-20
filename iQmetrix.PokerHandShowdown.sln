@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQmetrix.PokerHandShowdown", "iQmetrix.PokerHandShowdown\iQmetrix.PokerHandShowdown.csproj", "{4E6D5466-6E47-4383-888E-A9AF828D519F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQmetrix.PokerHandShowdown.Models", "iQmetrix.PokerHandShowdown.Models\iQmetrix.PokerHandShowdown.Models.csproj", "{266E6160-5A80-45D3-B2CD-24EE6E8AE9BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQmetrix.PokerHandShowdown.App", "iQmetrix.PokerHandShowdown.App\iQmetrix.PokerHandShowdown.App.csproj", "{70FA6A55-B6AF-42F6-ADF2-93F08510C2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQmetrix.PokerHandShowdown.Tests", "iQmetrix.PokerHandShowdown.Tests\iQmetrix.PokerHandShowdown.Tests.csproj", "{99C110BC-C09B-4414-829E-6BED80ED02AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E6D5466-6E47-4383-888E-A9AF828D519F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6D5466-6E47-4383-888E-A9AF828D519F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6D5466-6E47-4383-888E-A9AF828D519F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6D5466-6E47-4383-888E-A9AF828D519F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266E6160-5A80-45D3-B2CD-24EE6E8AE9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266E6160-5A80-45D3-B2CD-24EE6E8AE9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266E6160-5A80-45D3-B2CD-24EE6E8AE9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266E6160-5A80-45D3-B2CD-24EE6E8AE9BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70FA6A55-B6AF-42F6-ADF2-93F08510C2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70FA6A55-B6AF-42F6-ADF2-93F08510C2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70FA6A55-B6AF-42F6-ADF2-93F08510C2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70FA6A55-B6AF-42F6-ADF2-93F08510C2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99C110BC-C09B-4414-829E-6BED80ED02AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C110BC-C09B-4414-829E-6BED80ED02AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C110BC-C09B-4414-829E-6BED80ED02AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C110BC-C09B-4414-829E-6BED80ED02AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6566A11-2B01-4BA4-B294-4848FC15EEB9}
+	EndGlobalSection
+EndGlobal
