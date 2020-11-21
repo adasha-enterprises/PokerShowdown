@@ -10,16 +10,11 @@ namespace iQmetrix.PokerHandShowdown
     public abstract class CardHand : ICardGameHand, IComparable<ICardGameHand>
     {
         public Card[] Cards { get; set; }
+        public int CardsInHand { get; set; }
 
-        protected void Sort()
+        protected void InitialSort()
         {
             Cards = Cards.OrderBy(c => c.Rank).OrderBy(c => Cards.Where(c1 => c1.Rank == c.Rank).Count()).ToArray();
-
-            // need to put the Ace first when the other cards are 2-5
-            if (Cards[4].Rank == CardRank.Ace && Cards[0].Rank == CardRank.Two && ((int)Cards[3].Rank - (int)Cards[0].Rank == 3))
-            {
-                Cards = new Card[] { Cards[4], Cards[0], Cards[1], Cards[2], Cards[3] };
-            }
         }
 
         public int GetGroupByRankCount(int n) => Cards.GroupBy(c => c.Rank).Count(g => g.Count() == n);
@@ -28,7 +23,7 @@ namespace iQmetrix.PokerHandShowdown
 
         public int CompareTo(ICardGameHand other)
         {
-            for (var i = 4; i >= 0; i--)
+            for (var i = CardsInHand - 1; i >= 0; i--)
             {
                 CardRank rank1 = Cards[i].Rank, rank2 = other.Cards[i].Rank;
 
@@ -47,14 +42,14 @@ namespace iQmetrix.PokerHandShowdown
 
         public bool Contains(Card card) => Cards.Where(c => c.Rank == card.Rank && c.Suit == card.Suit).Any();
 
-        public bool HandHasDuplicateCards() => Cards.GroupBy(c => new { c.Rank, c.Suit }).Where(c => c.Skip(1).Any()).Any();
+        protected bool HandHasDuplicateCards() => Cards.GroupBy(c => new { c.Rank, c.Suit }).Where(c => c.Skip(1).Any()).Any();
 
         protected Card[] BuildHand(string[] cardsInput)
         {
-            var cards = new Card[5];
+            var cards = new Card[CardsInHand];
 
-            // 1-5 are the cards
-            for (int i = 1; i < 6; i++)
+            // index 0 is the player, the remainder are the cards in the hand
+            for (int i = 1; i < CardsInHand + 1; i++)
             {
                 var card = new Card();
 

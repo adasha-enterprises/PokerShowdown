@@ -1,4 +1,6 @@
-﻿using iQmetrix.PokerHandShowdown.Interfaces;
+﻿using iQmetrix.PokerHandShowdown.Configuration;
+using iQmetrix.PokerHandShowdown.Interfaces;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -13,13 +15,21 @@ namespace iQmetrix.PokerHandShowdown.App
     {
         private readonly ICardGameService _cardGameService;
         private readonly ICardHandCreator _cardHandCreator;
+        private readonly ConfigSettings _configSettings;
         private readonly ILogger _logger;
         private readonly IHostApplicationLifetime _lifeTime;
 
-        public PokerHandShowdown(ICardGameService cardGameService, ICardHandCreator cardHandCreator, ILogger<PokerHandShowdown> logger, IHostApplicationLifetime lifeTime)
+        public PokerHandShowdown(
+            ICardGameService cardGameService,
+            ICardHandCreator cardHandCreator,
+            IOptions<ConfigSettings> options,
+            ILogger<PokerHandShowdown> logger,
+            IHostApplicationLifetime lifeTime
+        )
         {
             _cardGameService = cardGameService;
             _cardHandCreator = cardHandCreator;
+            _configSettings = options.Value;
             _logger = logger;
             _lifeTime = lifeTime;
         }
@@ -28,10 +38,11 @@ namespace iQmetrix.PokerHandShowdown.App
         {
             var hands = new Dictionary<string, ICardGameHand>();
 
-            var playersAndCards = new string[] { "Joe,3H,6H,8H,JH,KH" , "Jen,3C,3D,3S,8C,10D", "Bob,2H,5C,7S,10C,AC" };
-
             try
             {
+                //TODO: add some validation to the property to ensure it's formatted correctly, but for now the value in appsettings.json is valid
+                var playersAndCards = _configSettings.PLAYERS_AND_CARDS.Split('|');
+
                 playersAndCards.ToList().ForEach(async p =>
                     {
                         var _ = p.Split(',');
